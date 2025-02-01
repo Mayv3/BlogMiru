@@ -1,9 +1,8 @@
 ---
 import "../styles/global.css";
 import { ClientRouter, fade, slide } from 'astro:transitions';
-
+import NavBar from "../components/NavBar/NavBar"
 ---
-
 <!doctype html>
 <html lang="en">
 	<head>
@@ -15,13 +14,16 @@ import { ClientRouter, fade, slide } from 'astro:transitions';
 		<ClientRouter />
 	</head>
 	<body>
+		<NavBar client:load/>
 		<div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"><div class="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)]"></div></div>
-		<slot />
+		<div class="pt-20">
+			<slot/>
+		</div>
 	</body>
 </html>
 
 <style>
-	html,
+	html,3
 	body {
 		margin: 0;
 		width: 100%;

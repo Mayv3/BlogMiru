@@ -6,7 +6,7 @@ const posts = await getCollection("posts");
 ---
 
 <Layout>
-	<div class="max-w-5xl mx-auto px-6 py-10">
+	<div class="max-w-5xl mx-auto px-6 py-10 " >
 		<h1 class="text-4xl font-bold text-center text-gray-800 mb-8">
 			📖 Blog
 		</h1>
@@ -22,7 +22,7 @@ const posts = await getCollection("posts");
 								src={post.data.image}
 								alt={post.data.title}
 								class="z-10"
-								transition:name={post.data.image}
+								transition:name={post.slug}
 							/>
 						)}
 						<div class="p-6" >
