@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  
+  return posts.map((post:any) => ({
+    params: {
+      slug: post.slug
+    },
+    props: {
+      post
+    }
+  }));
+}
+
+  const {post} = Astro.props;
+  const {data} = post;
+  const {title, description, pubDate, tags, image, author} = data;
+  const {Content} = await render(post);
+---
+
+
+<Layout>
+    <div class="max-w-3xl mx-auto px-6 py-10" 
+    > 
+        {image && (
+            <img
+              src={image}
+              alt={title}
+              class="z-10 w-full h-64 object-cover rounded-lg mb-6"
+              transition:name={image}
+            />
+          )}
+       
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">{title}</h1>
+        <p class="text-gray-600">{description}</p>
+        <p class="text-sm text-gray-500 mt-2">Publicado el {pubDate} por <span class="font-semibold">{author}</span></p>
+        
+        <div class="mt-6 border-t pt-6 prose max-w-full">
+          <Content/>
+        </div>
+    
+        <div class="mt-8 flex flex-wrap gap-2">
+          {tags.map((tag: String) => (
+            <span class="bg-blue-100 text-blue-600 px-3 py-1 text-sm rounded-full">{tag}</span>
+          ))}
+        </div>
+    
+        <a href="/" class="mt-6 inline-block text-blue-600 hover:underline">⬅ Volver al inicio</a>
+    </div>
+  </Layout>
+  
+
